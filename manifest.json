@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Thala Thirinjon",
+  "version": "1.0",
+  "description": "Ivan mala marikkum",
+  "permissions": ["storage", "activeTab", "scripting", "alarms"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Thala-thirinjon"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["uploads/c/*", "uploads/z/*", "uploads/hourly_images/*","uploads/*.mp4"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
