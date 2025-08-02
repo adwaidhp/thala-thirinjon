@@ -80,46 +80,31 @@ For Software:
 
 # Screenshots (Add at least 3)
 
-![Screenshot1](Add screenshot 1 here with proper name)
-_Add caption explaining what this shows_
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/047e0ab9-e27c-4add-adb7-746fab5bb1ca" />
 
-![Screenshot2](Add screenshot 2 here with proper name)
-_Add caption explaining what this shows_
+Extension installation page
+_Extension Installation_
 
-![Screenshot3](Add screenshot 3 here with proper name)
-_Add caption explaining what this shows_
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/7667ddce-43db-45c7-a8a8-54994d8d0e49" />
+Rotated page
+_By default all webpages are loaded after rotation of 180 degrees_
 
-# Diagrams
+<img width="1903" height="983" alt="image" src="https://github.com/user-attachments/assets/2c3defb9-7030-4bdf-bf73-37508bfec659" />
 
-![Workflow](Add your workflow/architecture diagram here)
-_Add caption explaining your workflow_
+Warning Video
+_A warning pop-up video is shown while searching for "btech","ktu" etc_
 
-For Hardware:
+<img width="1916" height="931" alt="image" src="https://github.com/user-attachments/assets/ad2c553e-d948-4584-b1c3-f458797bc3b5" />
 
-# Schematic & Circuit
+Random Bomb Blast
+_The contents of the page are scattered as if due to a blast when pressing Ctrl + S_
 
-![Circuit](Add your circuit diagram here)
-_Add caption explaining connections_
-
-![Schematic](Add your schematic diagram here)
-_Add caption explaining the schematic_
-
-# Build Photos
-
-![Components](Add photo of your components here)
-_List out all components shown_
-
-![Build](Add photos of build process here)
-_Explain the build steps_
-
-![Final](Add photo of final product here)
-_Explain the final build_
 
 ### Project Demo
 
 # Video
 
-[Add your demo video link here]
+
 _Explain what the video demonstrates_
 
 # Additional Demos
