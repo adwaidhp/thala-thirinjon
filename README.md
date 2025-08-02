@@ -4,7 +4,7 @@
 
 ## Basic Details
 
-### Team Name: [Data Vortex]
+### Team Name: Data Vortex
 
 ### Team Members
 
