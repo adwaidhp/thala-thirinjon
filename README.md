@@ -8,17 +8,17 @@
 
 ### Team Members
 
-- Member 1: [Adwaith Aswakumar] - [Government Engineering College Thrissur]
-- Member 2: [Adwaidh Payattuparambil] - [Government Engineering College Thrissur]
+- Member 1: Adwaith Aswakumar - Government Engineering College Thrissur
+- Member 2: Adwaidh Payattuparambil - Government Engineering College Thrissur
 
 ### Project Description
 
-["Ee extension mala marakkum"
-    A chaotic Chrome extension that turns any webpage into a playground of pranks — with roasts, DOM mischief, Gen-Z slang, fake modals, and unhinged keyboard shortcuts.]
+"Ee extension mala marakkum"
+    A chaotic Chrome extension that turns any webpage into a playground of pranks — with roasts, DOM mischief, Gen-Z slang, fake modals, and unhinged keyboard shortcuts.
 
 ### The Problem (that doesn't exist)
 
-[Coding and browsing the web are too normal. People just scroll calmly, read things, click buttons...
+Coding and browsing the web are too normal. People just scroll calmly, read things, click buttons...
 Where's the fun, the chaos, the mind-melting madness? Problems that seemed not to exist:
 
 1. People are not talking in genz language in official emails
@@ -29,11 +29,10 @@ Where's the fun, the chaos, the mind-melting madness? Problems that seemed not t
 6. Lack of bombs to blow up one's screen content.
 7. Warns about future life decisions (Joining B.Tech).
 
-]
 
 ### The Solution (that nobody asked for)
 
-[We are solving it in the most useless way possible. Users can solve all of the above (non-existent) problems by downloading our web extension. 
+We are solving it in the most useless way possible. Users can solve all of the above (non-existent) problems by downloading our web extension. 
 1. Ctrl + P: Translates proffesional english to broken language as a mix of hindi and english while using genz terms.
 2. Ctrl + R: Rotates the whole webpage by 180 degrees.
 3. Ctrl + U: Switches QWERTY keyboard to ABCDE keyboard, confusing the user.
@@ -43,7 +42,6 @@ Where's the fun, the chaos, the mind-melting madness? Problems that seemed not t
 6. Ctrl + S: Blows up the screen.
 7. Searching for terms like "ktu", "btech", "CSE" might end up in a warning!!
 
-]
 
 ## Technical Details
 
@@ -70,7 +68,7 @@ Load Unpacked extension -> open and select thala-thirinjon folder.
 
 
 # Run
-Open any website and see the magic happen.
+`Open any website and see the magic happen.`
 
 ### Project Documentation
 
