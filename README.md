@@ -61,9 +61,13 @@ As a browser extension in Chrome.
 # Installation
 
 [git clone https://github.com/adwaidhp/thala-thirinjon.git]
+
 cd thala-thirinjon
+
 Open Chrome Web Browser and go to `chrome://extensions/`.
+
 Turn on developer mode.
+
 Load Unpacked extension -> open and select thala-thirinjon folder.
 
 
