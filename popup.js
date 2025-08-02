@@ -4,7 +4,9 @@ const defaultSettings = {
   pageRotateEnabled: true,
   inputSlangifyEnabled: true,
   undoRoastEnabled: true,
-  prankModeEnabled: true,
+  prankModeEnabled: false,
+    blastEnabled: true,
+
 };
 
 // Load settings when popup opens

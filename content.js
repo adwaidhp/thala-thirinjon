@@ -5,8 +5,24 @@ class MischiefMaker {
     this.abcModeActive = false;
     this.pageRotated = false;
     this.isProcessing = false;
+    this.cursors = []; // For multiple cursor effect
     this.GROQ_API_KEY =
       "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";
+
+    // Keywords that trigger audio when found in URL query parameters
+    this.triggerKeywords = [
+      "btech",
+      "pala brilliant",
+      "computer science engineering",
+      "cse",
+      "engineering",
+      "college",
+      "university",
+      "student",
+      "exam",
+      "study",
+      "ktu",
+    ];
 
     this.qwertyToAlphabetic = {
       q: "a",
@@ -45,10 +61,12 @@ class MischiefMaker {
     this.addEventListeners();
     this.addStyles();
     this.addDoubleClickListener();
+    this.checkForTriggerKeywords(); // Check URL for trigger keywords
+
     if (this.settings.prankModeEnabled) {
       this.playPrank();
     } else {
-      if (this.settings.pageRotateEnabled) {
+      if (!this.pageRotated && this.settings.pageRotateEnabled) {
         this.forceRotatePage();
       }
     }
@@ -61,8 +79,8 @@ class MischiefMaker {
       pageRotateEnabled: true,
       inputSlangifyEnabled: true,
       undoRoastEnabled: true,
-      hourlyImagesEnabled: true,
-      prankModeEnabled: true,
+      prankModeEnabled: false,
+      blastEnabled: true,
     };
 
     try {
@@ -72,6 +90,27 @@ class MischiefMaker {
       return defaultSettings;
     }
   }
+
+  // Check if URL contains trigger keywords and play audio
+  checkForTriggerKeywords() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const query =
+      urlParams.get("q") ||
+      urlParams.get("query") ||
+      urlParams.get("search") ||
+      "";
+    const fullUrl = window.location.href.toLowerCase();
+
+    const foundKeyword = this.triggerKeywords.some(
+      (keyword) =>
+        query.toLowerCase().includes(keyword) || fullUrl.includes(keyword)
+    );
+
+    if (foundKeyword) {
+      this.showVideoModal("uploads/icognito.mp4"); // You can change this to any audio file
+    }
+  }
+
   forceRotatePage() {
     document.body.classList.add("mischief-rotated");
     this.pageRotated = true;
@@ -104,7 +143,8 @@ class MischiefMaker {
                 padding: 20px !important;
                 border-radius: 10px !important;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-                max-width: 400px !important;
+                max-width: 800px !important;
+                max-height: 600px;
                 text-align: center !important;
             }
             
@@ -167,10 +207,64 @@ class MischiefMaker {
             .mischief-shortcuts-modal .close-btn:hover {
                 background: rgba(255, 255, 255, 0.3) !important;
             }
+
+            .mischief-fade-out {
+                animation: mischief-fade-out 2s ease-out forwards !important;
+            }
+
+            .mischief-blast-scatter {
+                animation: mischief-blast-scatter 1s ease-out forwards !important;
+            }
+
+            .fake-cursor {
+                position: fixed !important;
+                width: 20px !important;
+                height: 20px !important;
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black"><path d="M7.5 14.5L4 18l1.5 1.5L9 16l5.5 5.5L16 20l-5.5-5.5L16 9l-1.5-1.5L9 13 4 8 2.5 9.5z"/></svg>') no-repeat !important;
+                pointer-events: none !important;
+                z-index: 9999 !important;
+                opacity: 0.8 !important;
+            }
+
+            .bomb-emoji {
+                position: fixed !important;
+                font-size: 30px !important;
+                pointer-events: none !important;
+                z-index: 9999 !important;
+                animation: bomb-fall 2s ease-in forwards !important;
+            }
             
             @keyframes mischief-fade-in {
                 from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
                 to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            }
+
+            @keyframes mischief-fade-out {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+
+            @keyframes mischief-blast-scatter {
+                0% { transform: scale(1) rotate(0deg); }
+                50% { transform: scale(1.2) rotate(180deg); }
+                100% { 
+                    transform: scale(0.1) rotate(360deg) translateX(var(--scatter-x, 0)) translateY(var(--scatter-y, 0));
+                    opacity: 0;
+                }
+            }
+
+            @keyframes bomb-fall {
+                0% { 
+                    transform: translateY(-100vh) rotate(0deg);
+                    opacity: 1;
+                }
+                70% {
+                    opacity: 1;
+                }
+                100% { 
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
             }
             
             .mischief-modal, .mischief-shortcuts-modal {
@@ -203,11 +297,20 @@ class MischiefMaker {
 
   async handleKeyDown(event) {
     const key = event.key.toLowerCase();
-    if (event.ctrlKey && event.shiftKey && key === "n") {
+
+    // Handle ESC key - fade out content with audio
+    if (key === "escape") {
       event.preventDefault();
-      this.showVideoModal("./uploads/icognito.mp4"); // replace with your video path
+      this.handleEscapeKey(event);
       return;
     }
+
+    if (event.ctrlKey && event.shiftKey && key === "n") {
+      event.preventDefault();
+      this.showVideoModal("./uploads/icognito.mp4");
+      return;
+    }
+
     if (!this.isCorrectModifier(event)) {
       // Handle ABC mode input when active
       if (this.abcModeActive && this.settings.abcKeyboardEnabled) {
@@ -237,6 +340,10 @@ class MischiefMaker {
           this.handleInputSlangify(event);
         }
         break;
+      case "s":
+        // Handle Ctrl+S - Bomb blast effect
+        this.handleBombBlast(event);
+        break;
       case "z":
         if (this.settings.undoRoastEnabled) {
           this.handleUndoRoast(event);
@@ -246,6 +353,77 @@ class MischiefMaker {
         this.handleShowShortcuts(event);
         break;
     }
+  }
+
+  // New feature: ESC key handler
+  handleEscapeKey(event) {
+    this.playAudio("uploads/esc.mp3");
+
+    // Add fade out class to all major content elements
+    const elementsToFade = document.querySelectorAll(
+      "body > *, main, article, section, .content, #content, .container, #container"
+    );
+    elementsToFade.forEach((element) => {
+      element.classList.add("mischief-fade-out");
+    });
+
+    this.showNotification("🌫️ Everything fades away...", "#666666");
+
+    // Restore content after fade animation
+    // setTimeout(() => {
+    //   elementsToFade.forEach((element) => {
+    //     element.classList.remove("mischief-fade-out");
+    //   });
+    // }, 3000);
+  }
+
+  // New feature: Bomb blast effect on Ctrl+S
+  handleBombBlast(event) {
+    event.preventDefault();
+
+    // Create bomb emojis falling from top
+    const bombEmojis = ["💥", "💣", "🧨", "⚡", "🔥"];
+
+    for (let i = 0; i < 15; i++) {
+      setTimeout(() => {
+        const bomb = document.createElement("div");
+        bomb.className = "bomb-emoji";
+        bomb.textContent =
+          bombEmojis[Math.floor(Math.random() * bombEmojis.length)];
+        bomb.style.left = Math.random() * window.innerWidth + "px";
+        bomb.style.top = "-50px";
+        document.body.appendChild(bomb);
+
+        // Remove bomb after animation
+        setTimeout(() => bomb.remove(), 2000);
+      }, i * 100);
+    }
+
+    // Scatter page content
+    setTimeout(() => {
+      const elementsToScatter = document.querySelectorAll(
+        "p, h1, h2, h3, h4, h5, h6, img, button, a, span, div"
+      );
+      elementsToScatter.forEach((element, index) => {
+        if (index % 3 === 0) {
+          // Only scatter every 3rd element to avoid too much chaos
+          const scatterX = (Math.random() - 0.5) * 200 + "px";
+          const scatterY = (Math.random() - 0.5) * 200 + "px";
+          element.style.setProperty("--scatter-x", scatterX);
+          element.style.setProperty("--scatter-y", scatterY);
+          element.classList.add("mischief-blast-scatter");
+
+          // Remove scatter effect after animation
+          //   setTimeout(() => {
+          //     element.classList.remove("mischief-blast-scatter");
+          //     element.style.removeProperty("--scatter-x");
+          //     element.style.removeProperty("--scatter-y");
+          //   }, 1000);
+        }
+      });
+    }, 1500);
+
+    this.showNotification("💥 BOOM! Content scattered!", "#ff4444");
   }
 
   handleCopyRoast(event) {
@@ -384,8 +562,7 @@ class MischiefMaker {
   async callGroqAPI(text) {
     const systemPrompt =
       "You are a genz converter. Your task is to rewrite the user's text into Gen Z and internet slang. Be funny and chaotic.";
-    const userPrompt = `Rewrite this text: "${text}". Rules to follow: 1. Start greetings like "Heyy all" with "bhailog". 2. Change "hey" to "bhai". 3. Use the words "unriyal", "basically", and "escatly". 4. Change "real" to "riyal". 5. Change "color" to "kelar". 6. Express joy with "lessgoo". 7. Express sadness or shock with "unriyal". 8. Use "escatly" instead of "exactly". 9. The slang level should be comparable to 'skibidi toilet' memes in its absurdity. Maintain the flow of conversation. Return only the output. The translated text should be comparable to the length of the input text. `;
-    // const userPrompt = `Rewrite this text: "${text}". Rules to follow: Maintain the flow of conversation. Return only the output. The translated text should be comparable to the length of the input text. `;
+    const userPrompt = `Rewrite this text: "${text}". Rules to follow: Maintain the flow of conversation. Return only the output as is, No further messages. The translated text should be comparable to the length of the input text. `;
 
     const response = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
@@ -450,7 +627,7 @@ class MischiefMaker {
     video.src = chrome.runtime.getURL(videoPath);
     video.autoplay = true;
     video.controls = true;
-    video.width = 800;
+    video.width = 400;
     video.style.display = "block";
     video.style.borderRadius = "6px";
 
@@ -464,16 +641,11 @@ class MischiefMaker {
     };
     modal.appendChild(video);
     document.body.appendChild(modal);
-
-    // Remove modal after 4 seconds (or adjust based on video duration)
-    // setTimeout(() => {
-    //   if (modal.parentNode) {
-    //     modal.parentNode.removeChild(modal);
-    //   }
-    // }, 4000);
   }
 
+  // Enhanced prank mode with multiple cursors
   playPrank() {
+    // Original colorful mouse trail
     document.addEventListener("mousemove", (e) => {
       const ghost = document.createElement("div");
       ghost.style.position = "fixed";
@@ -491,7 +663,10 @@ class MischiefMaker {
       setTimeout(() => ghost.remove(), 500);
     });
 
-    // === 6. Buttons flee from your cursor ===
+    // Multiple cursor effect
+    // this.createMultipleCursors();
+
+    // Buttons flee from cursor
     document.querySelectorAll('button, input[type="submit"]').forEach((btn) => {
       btn.style.position = "relative";
       btn.addEventListener("mouseenter", () => {
@@ -502,7 +677,7 @@ class MischiefMaker {
       });
     });
 
-    // === 7. Replace text with random emojis ===
+    // Replace text with random emojis
     function emojiBomb(el) {
       const emojis = ["😈", "💥", "😂", "🤯", "🔥", "👻", "🌀", "🙃"];
       const walker = document.createTreeWalker(
@@ -522,6 +697,43 @@ class MischiefMaker {
       }
     }
     emojiBomb(document.body);
+  }
+
+  // New feature: Create multiple fake cursors
+  createMultipleCursors() {
+    const numCursors = 12; // Number of fake cursors
+
+    document.addEventListener("mousemove", (e) => {
+      // Remove old fake cursors
+      this.cursors.forEach((cursor) => cursor.remove());
+      this.cursors = [];
+
+      // Create new fake cursors
+      for (let i = 0; i < numCursors; i++) {
+        const fakeCursor = document.createElement("div");
+        fakeCursor.className = "fake-cursor";
+
+        // Add some random offset to each cursor
+        const offsetX = (Math.random() - 0.5) * 100;
+        const offsetY = (Math.random() - 0.5) * 100;
+        const delay = Math.random() * 200; // Random delay for more chaos
+
+        setTimeout(() => {
+          fakeCursor.style.left = e.clientX + offsetX + "px";
+          fakeCursor.style.top = e.clientY + offsetY + "px";
+        }, delay);
+
+        document.body.appendChild(fakeCursor);
+        this.cursors.push(fakeCursor);
+
+        // Remove cursor after a short time
+        setTimeout(() => {
+          if (fakeCursor.parentNode) {
+            fakeCursor.remove();
+          }
+        }, 300 + delay);
+      }
+    });
   }
 
   showModal(imagePath) {
@@ -568,7 +780,7 @@ class MischiefMaker {
     const modifierKey = this.isMac() ? "Cmd" : "Ctrl";
 
     modal.innerHTML = `
-            <h2>🎭 Mischief Maker Shortcuts</h2>
+            <h2>🎭 thala-thirinjon Shortcuts</h2>
             <ul class="shortcut-list">
                 <li class="shortcut-item">
                     <span class="shortcut-key">${modifierKey} + C</span>
@@ -587,12 +799,20 @@ class MischiefMaker {
                     <span>Slangify input text</span>
                 </li>
                 <li class="shortcut-item">
+                    <span class="shortcut-key">${modifierKey} + S</span>
+                    <span>Bomb blast effect with content scatter</span>
+                </li>
+                <li class="shortcut-item">
                     <span class="shortcut-key">${modifierKey} + Z</span>
                     <span>Undo with roast</span>
                 </li>
                 <li class="shortcut-item">
                     <span class="shortcut-key">${modifierKey} + 0</span>
                     <span>Show this shortcuts list</span>
+                </li>
+                <li class="shortcut-item">
+                    <span class="shortcut-key">ESC</span>
+                    <span>Fade away all content</span>
                 </li>
             </ul>
             <button class="close-btn" onclick="this.parentElement.remove()">Close</button>

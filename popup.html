@@ -1,91 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mischief Maker Settings</title>
-    <link rel="stylesheet" href="popup.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thala-Thirinjon Extension Settings</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>🎭 Mischief Maker</h1>
-            <p>Toggle your chaotic shortcuts</p>
-        </header>
-        
-        <div class="shortcuts-list">
-            <div class="shortcut-item">
-                <div class="shortcut-info">
-                    <span class="shortcut-key">Ctrl + C</span>
-                    <span class="shortcut-desc">Roasts you for copying code</span>
-                </div>
-                <label class="toggle">
-                    <input type="checkbox" id="copyRoastEnabled" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="shortcut-item">
-                <div class="shortcut-info">
-                    <span class="shortcut-key">Ctrl + U</span>
-                    <span class="shortcut-desc">ABC keyboard mode</span>
-                </div>
-                <label class="toggle">
-                    <input type="checkbox" id="abcKeyboardEnabled" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="shortcut-item">
-                <div class="shortcut-info">
-                    <span class="shortcut-key">Ctrl + R</span>
-                    <span class="shortcut-desc">Rotate page upside down</span>
-                </div>
-                <label class="toggle">
-                    <input type="checkbox" id="pageRotateEnabled" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="shortcut-item">
-                <div class="shortcut-info">
-                    <span class="shortcut-key">Ctrl + P</span>
-                    <span class="shortcut-desc">Slangify input text</span>
-                </div>
-                <label class="toggle">
-                    <input type="checkbox" id="inputSlangifyEnabled" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="shortcut-item">
-                <div class="shortcut-info">
-                    <span class="shortcut-key">Ctrl + Z</span>
-                    <span class="shortcut-desc">Undo roast</span>
-                </div>
-                <label class="toggle">
-                    <input type="checkbox" id="undoRoastEnabled" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            
-            <div class="shortcut-item">
-                <div class="shortcut-info">
-                    <span class="shortcut-key">Epic Prank Mode</span>
-                    <span class="shortcut-desc">Random pranks</span>
-                </div>
-                <label class="toggle">
-                    <input type="checkbox" id="prankModeEnabled" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
+      <header>
+        <h1>🎭 Thala-Thirinjon Extension</h1>
+        <p>Toggle your chaotic shortcuts</p>
+      </header>
+
+      <div class="shortcuts-list">
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Ctrl + C</span>
+            <span class="shortcut-desc">Roasts you for copying code</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="copyRoastEnabled" checked />
+            <span class="slider"></span>
+          </label>
         </div>
-        
-        <footer>
-            <p>Press <strong>Ctrl + 0</strong> to see shortcuts on any page</p>
-        </footer>
+
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Ctrl + U</span>
+            <span class="shortcut-desc">ABC keyboard mode</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="abcKeyboardEnabled" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Ctrl + R</span>
+            <span class="shortcut-desc">Rotate page upside down</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="pageRotateEnabled" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Ctrl + P</span>
+            <span class="shortcut-desc">Slangify input text</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="inputSlangifyEnabled" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Ctrl + Z</span>
+            <span class="shortcut-desc">Undo roast</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="undoRoastEnabled" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Ctrl + S</span>
+            <span class="shortcut-desc">Bomb Blast</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="blastEnabled" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Epic Prank Mode</span>
+            <span class="shortcut-desc">Random pranks</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="prankModeEnabled" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Esc</span>
+            <span class="shortcut-desc">Fades away</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <div class="shortcut-info">
+            <span class="shortcut-key">Search for btech</span>
+            <span class="shortcut-desc">Warns you</span>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>Press <strong>Ctrl + 0</strong> to see shortcuts on any page</p>
+      </footer>
     </div>
     <script src="popup.js"></script>
-</body>
+  </body>
 </html>

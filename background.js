@@ -1,11 +1,3 @@
-const HOURLY_IMAGES = [
-  "uploads/hourly_images/image1.png",
-  "uploads/hourly_images/image2.png",
-  "uploads/hourly_images/meme1.png",
-  "uploads/hourly_images/meme2.png",
-  "uploads/hourly_images/meme3.png",
-];
-
 // Initialize extension
 chrome.runtime.onInstalled.addListener(async () => {
   console.log("Thala-Thirinjon extension installed!");
@@ -18,7 +10,8 @@ chrome.runtime.onInstalled.addListener(async () => {
     inputSlangifyEnabled: true,
     undoRoastEnabled: true,
     selectedSlangifyEnabled: true,
-    prankModeEnabled:true,
+    prankModeEnabled:false,
+    blastEnabled:true,
   };
 
   await chrome.storage.sync.set(defaultSettings);
