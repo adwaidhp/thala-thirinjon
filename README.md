@@ -14,7 +14,6 @@
 ### Project Description
 
 ["Ee extension mala marakkum"
-
     A chaotic Chrome extension that turns any webpage into a playground of pranks — with roasts, DOM mischief, Gen-Z slang, fake modals, and unhinged keyboard shortcuts.]
 
 ### The Problem (that doesn't exist)
